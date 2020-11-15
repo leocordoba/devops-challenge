@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: challenge
+spec:
+  tls:
+  - hosts:
+    secretName: challenge-tls
+  rules:
+  - host:
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: challenge
+            port:
+              number: 80
