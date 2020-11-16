@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/random')
 def randomNumber():
-    return str(randint(0,10))
+    return str(randint(0,100))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
