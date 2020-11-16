@@ -1,13 +1,16 @@
+# The Challenge
+Create a web service with python deployed in a Kubernetes cluster, which responses random numbers (0-100) every minute to requests from an EC2 instance.
+
 # Files description
 
 ```bash
 .
-├── app                            # Web-app directory
+├── app                            # Web app directory
 │   ├── deploy.sh                  # Instructions to run the Flask app on top of Gunicorn port 5000
 │   ├── requirements.txt           # Python requirements
 │   └── src                        # Flask directory
 │       └── app.py                 # Flask app
-├── default                        # File to copy in Nginx during docker containerization proccess
+├── default                        # File to copy in Nginx during docker containerization process
 ├── Dockerfile                     # Docker file
 ├── manifest                       # Kubernetes files
 │   ├── challenge.yaml             # Deploys deployment and service objects
@@ -57,20 +60,20 @@ Optionally, it was registered an FQDN on DuckDNS and implemented port forwarding
 8. Apply **challenge.tf** file to provision an EC2 instance. The public IP address of the VM will be displayed at the end of the provisioning process:
 	> $> terraform apply
 
-9. Connect to the remote server with the public IP address provided.
+9. Connect to the remote server using the public IP address provided.
 
 10. Place the file **getNumber.sh** in the directory "/root" from the EC2 instance.
 
 11. Create a new crontab with the next instruction
 	> 1 * * * * /root/getNumber.sh
 	
-12. The logs will be displayed in "/root/randomNumber.txt
+12. The random numbers will be displayed in "/root/randomNumber.txt"
 
 # PROS/CONS
 
 - ## Pros
 
-	- It's easy to deploy
+	- Easy to deploy.
 	- The web service is deployed in Nginx which is a well-known solid and reliable web server used for production environments.
 	- The solution uses a registered domain.
 	- The EC2 instance achieves the security requirements and connects through a public key.
@@ -79,7 +82,7 @@ Optionally, it was registered an FQDN on DuckDNS and implemented port forwarding
 - ## Cons
 
 	- The Kubernetes cluster is a single node since it's deployed on Minikube and hence affects high availability.
-	- The kubernetes deployment only has one replica.
+	- The Kubernetes deployment only has one replica.
 	- Since it's a nested environment, the firewall rules could be difficult to implement until getting the Kubernetes cluster.
 	- The web service uses a self-signed certificate, not a production one.
 
